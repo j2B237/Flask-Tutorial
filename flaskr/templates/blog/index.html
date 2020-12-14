@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %} POSTS {% endblock %}
+
+{% block header %}
+    <h1>Posts </h1>
+    
+    {% if g.user %}
+        <a class ="action" href = "{{ url_for('blog.create') }}">New</a>
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+
+    {% for post in posts %}
+        <div class="card text-center">
+        
+             <!-- BREAK -->
+              <div class="card-header">
+                <h3> {{ post['title'] }} </h3>
+              </div>
+                         
+              <!-- BREAK -->
+              <div class="card-body">
+                <h5 class="card-title">by {{ post['username'] }} </h5>
+                <p class="card-text"> {{ post['body'] }}</p>
+                {% if g.user['id'] == post['author_id'] %}
+                    <a href="url_for('blog.update', id=post['id']) " class="btn btn-primary">Edit</a>
+                {% endif %}
+              </div>
+
+              <!-- BREAK -->
+              <div class="card-footer text-muted">
+                {{ post['created'].strftime('%Y-%m-%d') }}
+              </div>
+              <!-- BREAK -->
+        </div>
+
+         <!-- BREAK -->
+        {% if not loop.last %}
+                <hr>
+        {% endif %}
+    {% endfor %}
+    
+{% endblock %}

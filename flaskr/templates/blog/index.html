@@ -25,13 +25,13 @@
                 <h5 class="card-title">by {{ post['username'] }} </h5>
                 <p class="card-text"> {{ post['body'] }}</p>
                 {% if g.user['id'] == post['author_id'] %}
-                    <a href="url_for('blog.update', id=post['id']) " class="btn btn-primary">Edit</a>
+                    <a href="{{ url_for('blog.update', id=post['id']) }}" class="btn btn-primary">Edit</a>
                 {% endif %}
               </div>
 
               <!-- BREAK -->
               <div class="card-footer text-muted">
-                {{ post['created'].strftime('%Y-%m-%d') }}
+                {{ post['created'].strftime('%Y-%m-%d ') }}
               </div>
               <!-- BREAK -->
         </div>
